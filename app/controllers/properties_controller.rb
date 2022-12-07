@@ -1,4 +1,5 @@
 class PropertiesController < ApplicationController
+
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     #GET /properties
    def index 

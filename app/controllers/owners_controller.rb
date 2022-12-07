@@ -26,6 +26,7 @@ class OwnersController < ApplicationController
     owner =Owner.create!(owner_params)
 
     if owner
+        session[:user_id] = owner.id
         render json: owner ,status: :created
     end
 
@@ -61,7 +62,7 @@ end #END destroy
   #Restrict owner params to username and email
   def owner_params
 
-    params.permit(:email,:username)
+    params.permit(:email,:name, :password, :password_confirmation)
 
   end #END owner_params
 
