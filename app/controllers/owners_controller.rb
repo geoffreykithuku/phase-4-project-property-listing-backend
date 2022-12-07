@@ -11,12 +11,10 @@ class OwnersController < ApplicationController
 #GET /owners/:id
     def show
 
-    owner = Owner.find_by(id: params[:id])
+    owner = find_owner
 
     if owner
         render json: owner,status: :found
-    else
-        render json: {error:"Owner not found"} ,status: :not_found
     end
 
     end
@@ -28,7 +26,7 @@ class OwnersController < ApplicationController
     if owner
         render json: owner ,status: :created
     end
-    
+
    end
 
 #PATCH /owners/:id
@@ -50,7 +48,7 @@ end
    #Handle exception and rescue with RecordInvalid
    def render_unprocessable_entity_response(invalid)
 
-    render json: {errors: invalid.errors.full_messages},status: :unprocessable_entity 
+    render json: {errors: invalid.record.errors.full_messages},status: :unprocessable_entity 
 
    end
 
