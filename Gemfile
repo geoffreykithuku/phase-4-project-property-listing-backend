@@ -48,3 +48,5 @@ end
 
 gem 'faker'
 
+gem 'bcrypt', '~> 3.1.7'
+
