@@ -61,7 +61,7 @@ end #END destroy
   #Restrict owner params to username and email
   def owner_params
 
-    params.permit(:email,:username)
+    params.permit(:email,:name, :password, :password_confirmation)
 
   end #END owner_params
 
