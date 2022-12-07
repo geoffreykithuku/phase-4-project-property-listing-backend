@@ -1,4 +1,5 @@
 class PropertiesController < ApplicationController
+    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     #GET /properties
    def index 
     properties = Property.all 
@@ -53,5 +54,13 @@ class PropertiesController < ApplicationController
     params.permit(:owner_id,:location,:description,:price,:image)
 
     end #END property_params
+
+
+    #Handle exception and rescue with RecordInvalid
+   def render_unprocessable_entity_response(invalid)
+
+    render json: {errors: invalid.record.errors.full_messages},status: :unprocessable_entity 
+
+   end #END  handle exception
 
 end #END properties_controller
