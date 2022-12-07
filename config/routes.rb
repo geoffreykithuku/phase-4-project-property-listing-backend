@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :owners
+  resources :owners,only:[:index,:show]
   resources :reviews
   resources :properties
   resources :users
