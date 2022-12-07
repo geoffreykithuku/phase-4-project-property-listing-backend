@@ -6,18 +6,20 @@ class OwnersController < ApplicationController
 
    render json: owners ,status: :ok
 
-    end
+    end #END index
 
 #GET /owners/:id
     def show
 
     owner = find_owner
-
     if owner
-        render json: owner,status: :found
+    render json: owner,status: :found
+
+    else
+        
     end
 
-    end
+    end #END show
 
 #POST /owners
    def create 
@@ -27,44 +29,59 @@ class OwnersController < ApplicationController
         render json: owner ,status: :created
     end
 
-   end
+   end #END create
 
 #PATCH /owners/:id
 def update
  owner =find_owner
 
- owner.update(owner_params)
- 
-end
+ owner.update!(owner_params)
 
+ render json: owner,status: :accepted
+ 
+end #END update
+
+
+
+#DELETE owners/:id
+def destroy
+    owner =find_owner
+
+    owner.destroy
+    head :no_content
+end #END destroy
+
+
+
+
+
+
+#DEFINE private methods
    private
   #Restrict owner params to username and email
   def owner_params
 
     params.permit(:email,:username)
 
-  end
+  end #END owner_params
 
    #Handle exception and rescue with RecordInvalid
    def render_unprocessable_entity_response(invalid)
 
     render json: {errors: invalid.record.errors.full_messages},status: :unprocessable_entity 
 
-   end
+   end #END  handle exception
 
 #Find owner by id
 def find_owner
 
-owner = Owner.find_by(id: params[:id])
+an_owner = Owner.find_by(id: params[:id])
 
-if !owner
-
-    render json: {error: "Owner not found"},status: :not_found
-else
-    owner
-end
-
-end
+an_owner    
+end #END find_owner
 
 
-end
+
+
+
+end #END owners_controller
