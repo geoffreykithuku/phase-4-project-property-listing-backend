@@ -37,8 +37,33 @@ class PropertiesController < ApplicationController
 
    end #END create
 
+
+   #PATCH /properties/:id
+   def update
+
+    property = get_property
+
+    property.update!(property_params)
+
+    render json: property,status: :accepted
+
+   end #END update
+
+#DELETE /properties/:id
+   def destroy  
+    property = get_property
+
+    if property
+        property.destroy
+        head :no_content
+    else
+        render json: {error:"Property not found"},status: :not_found
+    end
+
+   end #END destroy
+
    private
-   #Get a property with given id
+#Get a property with given id
    def get_property
 
    a_property = Property.find_by(id: params[:id])
@@ -48,7 +73,7 @@ class PropertiesController < ApplicationController
    end #END get_property
   
 
-   #Define allowable parameters for mass assignment
+#Define allowable parameters for mass assignment
     def property_params
 
     params.permit(:owner_id,:location,:description,:price,:image)
@@ -56,7 +81,7 @@ class PropertiesController < ApplicationController
     end #END property_params
 
 
-    #Handle exception and rescue with RecordInvalid
+#Handle exception and rescue with RecordInvalid
    def render_unprocessable_entity_response(invalid)
 
     render json: {errors: invalid.record.errors.full_messages},status: :unprocessable_entity 
