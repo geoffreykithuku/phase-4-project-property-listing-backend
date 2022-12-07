@@ -1,5 +1,6 @@
 class OwnersController < ApplicationController
 
+
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found_method
 
@@ -41,10 +42,12 @@ class OwnersController < ApplicationController
        params.permit(:email,:username)
     end 
 
+
+   #Handle exception and rescue with RecordInvalid
+
    def render_unprocessable_entity_response(invalid)
 
     render json: {errors: invalid.record.errors.full_messages},status: :unprocessable_entity 
-
    end 
 
   def find_owner
@@ -58,5 +61,4 @@ def record_not_found_method
     render json: {error: "Restaurant not found"}, status: :not_found
 end
 
-end 
 end
