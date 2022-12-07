@@ -1,7 +1,6 @@
 class OwnersController < ApplicationController
 
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
-
     #GET /owners
     def index
    owners = Owner.all
