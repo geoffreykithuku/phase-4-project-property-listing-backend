@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
     class PropertiesController < ApplicationController
         rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
         #GET /users
@@ -92,3 +93,4 @@ class UsersController < ApplicationController
     end #END properties_controller
     
 end
+

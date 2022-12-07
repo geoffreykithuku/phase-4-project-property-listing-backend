@@ -1,88 +1,64 @@
 class OwnersController < ApplicationController
+
+
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found_method
+
     #GET /owners
     def index
    owners = Owner.all
-
    render json: owners ,status: :ok
+   end 
 
-    end #END index
-
-#GET /owners/:id
+    #GET /owners/:id
     def show
 
     owner = find_owner
-    if owner
     render json: owner,status: :found
 
-    else
-        render json: {error:"Owner not found"}, status: :not_found
-    end
-
-    end #END show
-
-#POST /owners
+    #POST /owners
    def create 
     owner =Owner.create!(owner_params)
+    render json: owner ,status: :created
 
-    if owner
-        session[:user_id] = owner.id
-        render json: owner ,status: :created
-    end
-
-   end #END create
-
-#PATCH /owners/:id
-def update
- owner =find_owner
-
- owner.update!(owner_params)
-
- render json: owner,status: :accepted
- 
-end #END update
-
-
-
-#DELETE owners/:id
-def destroy
+    #PATCH /owners/:id
+    def update
     owner =find_owner
+    owner.update!(owner_params)
+    render json: owner,status: :accepted
+    end 
 
+   #DELETE owners/:id
+   def destroy
+    owner =find_owner
     owner.destroy
     head :no_content
-end #END destroy
+   end
 
 
-
-
-
-
-#DEFINE private methods
    private
-  #Restrict owner params to username and email
-  def owner_params
 
-    params.permit(:email,:name, :password, :password_confirmation)
+    def owner_params
+       params.permit(:email,:username)
+    end 
 
-  end #END owner_params
 
    #Handle exception and rescue with RecordInvalid
+
    def render_unprocessable_entity_response(invalid)
 
     render json: {errors: invalid.record.errors.full_messages},status: :unprocessable_entity 
+   end 
 
-   end #END  handle exception
+  def find_owner
 
-#Find owner by id
-def find_owner
+  an_owner = Owner.find_by(id: params[:id])
 
-an_owner = Owner.find_by(id: params[:id])
+    an_owner 
+  end 
 
-an_owner    
-end #END find_owner
+def record_not_found_method
+    render json: {error: "Restaurant not found"}, status: :not_found
+end
 
-
-
-
-
-end #END owners_controller
+end
