@@ -5,7 +5,7 @@ class Owner < ApplicationRecord
     validates :username ,presence: true
 
     validates :email,
-        format: { with: /^(.+)@(.+)$/, message: "Email invalid"  },
+        format: { with: /\A(.+)@(.+)\z/, message: "invalid"  },
             uniqueness: { case_sensitive: false },
             length: { minimum: 4, maximum: 254 }
 end
