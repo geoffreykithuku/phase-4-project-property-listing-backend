@@ -26,6 +26,7 @@ class OwnersController < ApplicationController
     owner =Owner.create!(owner_params)
 
     if owner
+        session[:user_id] = owner.id
         render json: owner ,status: :created
     end
 
