@@ -16,7 +16,7 @@ class OwnersController < ApplicationController
     render json: owner,status: :found
 
     else
-        
+        render json: {error:"Owner not found"}, status: :not_found
     end
 
     end #END show
