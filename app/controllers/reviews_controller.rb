@@ -1,3 +1,4 @@
+
 class ReviewsController < ApplicationController
 
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
@@ -56,6 +57,5 @@ a_review = Review.find_by(id: params[:id])
 
 a_review   
 end #END find_owner
-
 
 end

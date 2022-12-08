@@ -2,8 +2,6 @@ class OwnersController < ApplicationController
 
 
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
-    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found_method
-
     #GET /owners
     def index
    owners = Owner.all
@@ -15,11 +13,13 @@ class OwnersController < ApplicationController
 
     owner = find_owner
     render json: owner,status: :found
+    end
 
     #POST /owners
    def create 
     owner =Owner.create!(owner_params)
     render json: owner ,status: :created
+   end
 
     #PATCH /owners/:id
     def update
