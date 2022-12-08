@@ -1,7 +1,9 @@
 class Owner < ApplicationRecord
     has_many :properties
     has_many :reviews,through: :properties
+
     has_secure_password
+
     validates :name ,presence: true
     validates :password, confirmation: true
 
