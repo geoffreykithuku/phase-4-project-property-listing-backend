@@ -1,5 +1,7 @@
 class PropertiesController < ApplicationController
 
+before_action :authorize
+skip_before_action :authorize, only: [:index]
         rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
         #GET /properties
@@ -24,7 +26,7 @@ class PropertiesController < ApplicationController
        #POST /properties
        def  create
        property = Property.new(property_params)
-         property.owner_id = 1
+         property.owner_id = session[:user_id]
          property.save!
        if property 
        
@@ -52,6 +54,9 @@ class PropertiesController < ApplicationController
        end
     
        private
+       def authorize 
+        render json: {error: "Unauthorized! Login to view this page."}, status: :unauthorized unless session.include? :user_id
+       end
 
        def get_property
        a_property = Property.find_by(id: params[:id])

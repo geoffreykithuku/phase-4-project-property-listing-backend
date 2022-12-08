@@ -18,6 +18,7 @@ class OwnersController < ApplicationController
     #POST /owners
    def create 
     owner =Owner.create!(owner_params)
+     session[:user_id] = owner.id
     render json: owner ,status: :created
    end
 
@@ -39,7 +40,7 @@ class OwnersController < ApplicationController
    private
 
     def owner_params
-       params.permit(:email,:username)
+       params.permit(:email,:name, :password, :password_confirmation)
     end 
 
 
