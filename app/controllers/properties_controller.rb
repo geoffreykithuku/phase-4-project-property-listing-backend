@@ -23,8 +23,11 @@ class PropertiesController < ApplicationController
     
        #POST /properties
        def  create
-       property = Property.create!(property_params)
+       property = Property.new(property_params)
+         property.owner_id = 1
+         property.save!
        if property 
+       
         render json: property ,status: :created
        end
        end 
@@ -56,7 +59,7 @@ class PropertiesController < ApplicationController
        end 
       
         def property_params
-        params.permit(:owner_id,:location,:description,:price,:image)
+        params.permit(:location,:description,:price,:image)
         end 
 
        def render_unprocessable_entity_response(invalid)
