@@ -11,15 +11,11 @@ puts "Seeding Owners...."
 
 
 Owner.create!([
-    {name: "Owen", email: "owne@gmail.com"},
-    {name: "Samantha", email: "sam@gmail.com"},
-    {name: "JaneDoe",email:"janedoe@gmail.com"},
-    {name: "Owen", email: "owne@gmail.com"},
-    {name: "Mark", email: "mark@gmail.com"}])
-=======
-Owner.create!([{username: "JaneDoe",email:"janedoe@gmail.com"},
-    {username: "JohnDoe",email:"johndoe@gmail.com"},
-    {username:"JohnShephard",email:"johnshephard@gmail.com"}])
+    {name: "Owen", email: "owne@gmail.com", password:"owen"},
+    {name: "Samantha", email: "sam@gmail.com",password:"samantha"},
+    {name: "JaneDoe",email:"janedoe@gmail.com", password:"jane"},
+    {name: "Owen", email: "oe@gmail.com", password:"owen"},
+    {name: "Mark", email: "mark@gmail.com",password:"owen"}])
 
 
 puts "Seeding Users"
