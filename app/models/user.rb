@@ -8,5 +8,9 @@ class User < ApplicationRecord
     validates :email,
         format: { with: /\A(.+)@(.+)\z/, message: "invalid"  },
             uniqueness: { case_sensitive: false },
-            length: { minimum: 4, maximum: 254 }
+            length: { minimum: 4, maximum: 72 }
+
+            def welcome
+                "Hello, #{self.email}!"
+              end
 end
