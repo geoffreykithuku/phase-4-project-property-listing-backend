@@ -10,7 +10,4 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false },
             length: { minimum: 4, maximum: 72 }
 
-            def welcome
-                "Hello, #{self.email}!"
-              end
 end
