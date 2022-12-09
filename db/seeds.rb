@@ -10,11 +10,11 @@ require 'faker'
 puts "Seeding Owners...."
 
 Owner.create!([
-    {username: "Owen", email: "owne@gmail.com"},
-    {username: "Samantha", email: "sam@gmail.com"},
-    {username: "JaneDoe",email:"janedoe@gmail.com"},
-    {username: "Owen", email: "owne@gmail.com"},
-    {username: "Mark", email: "mark@gmail.com"}])
+    {name: "Owen", email: "owne@gmail.com"},
+    {name: "Samantha", email: "sam@gmail.com"},
+    {name: "JaneDoe",email:"janedoe@gmail.com"},
+    {name: "Owen", email: "owne@gmail.com"},
+    {name: "Mark", email: "mark@gmail.com"}])
 
 puts "Done seeding Owners"
 

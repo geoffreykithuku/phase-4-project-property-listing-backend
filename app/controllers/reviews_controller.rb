@@ -1,4 +1,5 @@
-class ReviewsController < ApplicationControllers
+class ReviewsController < ApplicationController
+
         rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
         #GET /reviews
         def index
@@ -24,11 +25,7 @@ class ReviewsController < ApplicationControllers
     #POST /reviews
        def create 
         review =Review.create!(review_params)
-    
-        if review
-            render json: review ,status: :created
-        end
-    
+        render json: review ,status: :created
        end #END create
     
     
@@ -36,9 +33,7 @@ class ReviewsController < ApplicationControllers
        private
       #Restrict owner params to username and email
       def review_params
-    
-        params.permit(:property_id,:user_id,:description)
-    
+        params.permit(:property_id, :user_id, :description)
       end #END owner_params
     
        #Handle exception and rescue with RecordInvalid
